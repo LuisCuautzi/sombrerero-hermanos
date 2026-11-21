@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { CATEGORIAS } from '../../config';
+
+const productos = (await getCollection('productos')).sort((a, b) => a.data.orden - b.data.orden);
+---
+<Base titulo="Catálogo" descripcion="Catálogo de fustes forrados en acero, espuelas, frenos, hebillas y estribos artesanales.">
+  <section class="contenedor py-8 sm:py-12">
+    <h1 class="text-3xl font-bold sm:text-4xl">Catálogo</h1>
+    <p class="mt-2 text-cuero-700">Todas las piezas se hacen a mano. Muchas se pueden personalizar.</p>
+
+    <!-- Filtros: en celular se deslizan de lado -->
+    <div class="sin-scrollbar -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Filtrar por categoría">
+      <button class="filtro btn min-h-10 shrink-0 rounded-full px-4 py-2 text-sm" data-filtro="todos">Todos</button>
+      {CATEGORIAS.map((c) => (
+        <button class="filtro btn min-h-10 shrink-0 rounded-full px-4 py-2 text-sm" data-filtro={c.id}>{c.nombre}</button>
+      ))}
+    </div>
+
+    <div id="grid" class="mt-6 grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
+      {productos.map((p) => <ProductCard producto={p} />)}
+    </div>
+    <p id="vacio" class="mt-10 hidden text-center text-cuero-700">Pronto agregaremos piezas en esta categoría. Pregúntanos por WhatsApp.</p>
+  </section>
+</Base>
+
+<script>
+  const botones = document.querySelectorAll<HTMLButtonElement>('.filtro');
+  const tarjetas = document.querySelectorAll<HTMLElement>('.producto');
+  const vacio = document.getElementById('vacio')!;
+
+  function aplicar(filtro: string) {
+    let visibles = 0;
+    tarjetas.forEach((t) => {
+      const mostrar = filtro === 'todos' || t.dataset.categoria === filtro;
+      t.classList.toggle('hidden', !mostrar);
+      if (mostrar) visibles++;
+    });
+    vacio.classList.toggle('hidden', visibles > 0);
+    botones.forEach((b) => {
+      const activo = b.dataset.filtro === filtro;
+      b.classList.toggle('bg-cuero-700', activo);
+      b.classList.toggle('text-white', activo);
+      b.classList.toggle('bg-white', !activo);
+      b.classList.toggle('ring-1', !activo);
+      b.classList.toggle('ring-cuero-200', !activo);
+      b.setAttribute('aria-pressed', String(activo));
+    });
+    const url = new URL(location.href);
+    filtro === 'todos' ? url.searchParams.delete('categoria') : url.searchParams.set('categoria', filtro);
+    history.replaceState(null, '', url);
+  }
+
+  botones.forEach((b) => b.addEventListener('click', () => aplicar(b.dataset.filtro!)));
+  aplicar(new URLSearchParams(location.search).get('categoria') ?? 'todos');
+</script>

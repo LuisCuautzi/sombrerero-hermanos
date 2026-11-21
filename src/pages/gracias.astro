@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { waLink } from '../config';
+---
+<Base titulo="¡Gracias!">
+  <section class="contenedor max-w-xl py-20 text-center">
+    <h1 class="text-3xl font-bold sm:text-4xl">¡Recibimos tu pedido!</h1>
+    <p class="mt-4 text-lg text-cuero-700">Te contactaremos pronto con la cotización.</p>
+    <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+      <a href={waLink('Hola, acabo de enviar un pedido especial desde la página.')} target="_blank" rel="noopener" class="btn btn-whatsapp">Mandar foto por WhatsApp</a>
+      <a href="/catalogo/" class="btn btn-borde">Seguir viendo</a>
+    </div>
+  </section>
+</Base>

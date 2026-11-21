@@ -1,0 +1,104 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { SITE, CATEGORIAS, waLink } from '../config';
+
+const productos = await getCollection('productos');
+const destacados = productos
+  .filter((p) => p.data.destacado)
+  .sort((a, b) => a.data.orden - b.data.orden)
+  .slice(0, 8);
+
+const valores = [
+  { titulo: 'Grabado a mano', texto: 'Cada diseño se graba con buril directo sobre el acero, pieza por pieza, sin producción en serie.' },
+  { titulo: 'Trabajamos en acero', texto: 'Fustes forrados, espuelas, frenos, hebillas y estribos de acero, hechos para durar.' },
+  { titulo: 'A tu medida', texto: 'Tu nombre, iniciales, el fierro de tu rancho o el diseño que quieras.' },
+];
+---
+<Base>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-cuero-900 text-white">
+    <video
+      class="absolute inset-0 h-full w-full object-cover opacity-40"
+      src="/video/taller-portada.mp4"
+      poster="/img/portada.webp"
+      autoplay muted loop playsinline
+      aria-hidden="true"
+    ></video>
+    <div class="contenedor relative py-20 sm:py-28 lg:py-36">
+      <p class="text-sm font-semibold uppercase tracking-widest text-cuero-200">Talabartería artesanal en acero</p>
+      <h1 class="mt-3 max-w-2xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+        Acero grabado a mano para el jinete de verdad
+      </h1>
+      <p class="mt-4 max-w-xl text-lg text-cuero-100">{SITE.descripcion}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="/catalogo/" class="btn bg-white text-cuero-900 hover:bg-cuero-100">Ver catálogo</a>
+        <a href={waLink('Hola, me gustaría cotizar una pieza.')} target="_blank" rel="noopener" class="btn btn-whatsapp">
+          Cotizar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías -->
+  <section class="contenedor py-12 sm:py-16">
+    <h2 class="text-2xl font-bold sm:text-3xl">¿Qué estás buscando?</h2>
+    <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      {CATEGORIAS.map((c) => (
+        <a
+          href={`/catalogo/?categoria=${c.id}`}
+          class="flex min-h-20 items-center justify-center rounded-xl bg-white p-4 text-center font-semibold shadow-sm ring-1 ring-cuero-100 hover:bg-cuero-100"
+        >
+          {c.nombre}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Destacados -->
+  <section class="contenedor pb-12 sm:pb-16">
+    <div class="flex items-end justify-between gap-4">
+      <h2 class="text-2xl font-bold sm:text-3xl">Piezas destacadas</h2>
+      <a href="/catalogo/" class="shrink-0 text-sm font-semibold text-cuero-500 underline">Ver todo</a>
+    </div>
+    <div class="mt-6 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+      {destacados.map((p) => <ProductCard producto={p} />)}
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="bg-cuero-100 py-12 sm:py-16">
+    <div class="contenedor grid gap-6 md:grid-cols-3">
+      {valores.map((v) => (
+        <div class="rounded-xl bg-white p-6 shadow-sm">
+          <h3 class="text-xl font-bold">{v.titulo}</h3>
+          <p class="mt-2 text-cuero-700">{v.texto}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="contenedor grid items-center gap-8 py-12 sm:py-16 md:grid-cols-2">
+    <img src="/img/artesano-trabajando.webp" alt="Artesano grabando a mano la cabeza de un fuste de acero" loading="lazy" class="aspect-[4/3] w-full rounded-xl object-cover" />
+    <div>
+      <h2 class="text-2xl font-bold sm:text-3xl">Oficio de familia</h2>
+      <p class="mt-4 text-cuero-700">
+        Cada diseño se dibuja y se graba a mano con buril, directo sobre el acero. Así salen los fustes, espuelas,
+        frenos y hebillas de nuestro taller: piezas únicas, hechas para durar.
+        {/* ✏️ Aquí se puede agregar la historia corta del taller: cuántos años lleva y quién lo empezó. */}
+      </p>
+      <a href="/nosotros/" class="btn btn-borde mt-6">Conoce el taller</a>
+    </div>
+  </section>
+
+  <!-- CTA pedidos -->
+  <section class="contenedor">
+    <div class="rounded-2xl bg-cuero-700 px-6 py-10 text-center text-white sm:px-12">
+      <h2 class="text-2xl font-bold sm:text-3xl">¿Buscas algo a tu medida?</h2>
+      <p class="mx-auto mt-3 max-w-xl text-cuero-100">Fustes, espuelas, frenos y hebillas de acero con tu nombre, iniciales o el fierro de tu rancho.</p>
+      <a href="/pedidos/" class="btn mt-6 bg-white text-cuero-900 hover:bg-cuero-100">Hacer un pedido especial</a>
+    </div>
+  </section>
+</Base>

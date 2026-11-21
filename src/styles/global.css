@@ -1,0 +1,46 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-cuero-50: #faf6f1;
+  --color-cuero-100: #f1e7da;
+  --color-cuero-200: #e2cdb2;
+  --color-cuero-500: #a0703f;
+  --color-cuero-700: #6e4523;
+  --color-cuero-900: #3a2414;
+  --color-acero: #5b6168;
+  --color-whatsapp: #1fa855;
+  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply bg-cuero-50 text-cuero-900 font-sans antialiased;
+}
+
+h1, h2, h3 {
+  @apply font-display;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-semibold transition min-h-12;
+}
+.btn-primario { @apply bg-cuero-700 text-white hover:bg-cuero-900; }
+.btn-whatsapp { @apply bg-whatsapp text-white hover:brightness-95; }
+.btn-borde { @apply border-2 border-cuero-700 text-cuero-700 hover:bg-cuero-100; }
+
+.contenedor { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+
+.input {
+  @apply w-full rounded-lg border border-cuero-200 bg-white px-4 py-3 text-base
+    focus:border-cuero-500 focus:ring-2 focus:ring-cuero-200 focus:outline-none;
+}
+.label { @apply mb-1 block text-sm font-semibold; }
+
+/* Ocultar scrollbar en filtros horizontales del celular */
+.sin-scrollbar { scrollbar-width: none; }
+.sin-scrollbar::-webkit-scrollbar { display: none; }

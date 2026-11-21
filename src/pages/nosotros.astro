@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+
+const pasos = [
+  { n: '1', titulo: 'Corte y forma', texto: 'Se corta y se le da forma al acero de cada pieza.' },
+  { n: '2', titulo: 'Diseño', texto: 'Se traza el diseño sobre el acero: nombres, iniciales, fierros, grecas o follaje.' },
+  { n: '3', titulo: 'Grabado a mano', texto: 'Con buril se graba línea por línea, directo sobre el acero.' },
+  { n: '4', titulo: 'Acabado', texto: 'Pulido y acabado final: plateado, dorado o en negro, según la pieza.' },
+];
+---
+<Base titulo="Nosotros" descripcion={`Conoce la historia de ${SITE.nombre}, taller de talabartería artesanal.`}>
+  <section class="contenedor max-w-3xl py-8 sm:py-12">
+    <h1 class="text-3xl font-bold sm:text-4xl">Nuestro taller</h1>
+    <img src="/img/fustes-taller.webp" alt="Fustes forrados en acero terminados en el taller" class="mt-6 aspect-video w-full rounded-xl object-cover" />
+    <div class="mt-6 space-y-4 text-lg text-cuero-700">
+      <p>
+        En {SITE.nombre} trabajamos el acero. Hacemos fustes forrados en acero, espuelas, frenos, hebillas y
+        estribos, y cada uno se graba a mano en nuestro taller.
+        {/* ✏️ Agregar: cómo empezó el oficio, de quién aprendió, cuántos años lleva y dónde está el taller. */}
+      </p>
+      <p>
+        No hacemos piezas en serie: cada diseño se traza y se graba con buril, línea por línea. Por eso podemos
+        poner tu nombre, tus iniciales, el fierro de tu rancho o el diseño que nos pidas.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-cuero-100 py-12 sm:py-16">
+    <div class="contenedor">
+      <h2 class="text-2xl font-bold sm:text-3xl">Así trabajamos</h2>
+      <ol class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {pasos.map((p) => (
+          <li class="rounded-xl bg-white p-6 shadow-sm">
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-cuero-700 font-bold text-white">{p.n}</span>
+            <h3 class="mt-4 text-lg font-bold">{p.titulo}</h3>
+            <p class="mt-2 text-cuero-700">{p.texto}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="contenedor max-w-3xl py-12">
+    <h2 class="text-2xl font-bold sm:text-3xl">Así se graba una pieza</h2>
+    <p class="mt-2 text-cuero-700">Grabado a mano de la cabeza de un fuste, directo en el taller.</p>
+    <video class="mt-6 w-full rounded-xl bg-black" src="/video/taller.mp4" poster="/img/artesano-trabajando.webp" controls playsinline preload="metadata"></video>
+  </section>
+</Base>

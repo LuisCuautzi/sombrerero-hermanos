@@ -1,0 +1,118 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { CATEGORIAS, waLink } from '../../config';
+
+export async function getStaticPaths() {
+  const productos = await getCollection('productos');
+  return productos.map((p) => ({ params: { slug: p.id }, props: { producto: p } }));
+}
+
+const { producto } = Astro.props as { producto: CollectionEntry<'productos'> };
+const { nombre, categoria, imagenes, resumen, personalizable, video } = producto.data;
+// precio y materiales están ocultos por ahora (ver comentarios abajo)
+const { Content } = await render(producto);
+const cat = CATEGORIAS.find((c) => c.id === categoria);
+const url = new URL(Astro.url.pathname, Astro.site).href;
+
+const relacionados = (await getCollection('productos'))
+  .filter((p) => p.data.categoria === categoria && p.id !== producto.id)
+  .slice(0, 4);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: nombre,
+  description: resumen,
+  image: imagenes.map((i) => new URL(i, Astro.site).href),
+  category: cat?.nombre,
+};
+---
+<Base titulo={nombre} descripcion={resumen} imagen={imagenes[0]}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <div class="contenedor py-6 sm:py-10">
+    <nav class="text-sm text-cuero-500" aria-label="Migas de pan">
+      <a href="/catalogo/" class="underline">Catálogo</a> /
+      <a href={`/catalogo/?categoria=${categoria}`} class="underline">{cat?.nombre}</a>
+    </nav>
+
+    <div class="mt-4 grid gap-8 md:grid-cols-2 md:gap-12">
+      <!-- Galería: en celular se desliza con el dedo -->
+      <div>
+        <div id="galeria" class="sin-scrollbar flex snap-x snap-mandatory overflow-x-auto rounded-xl bg-cuero-100">
+          {imagenes.map((src, i) => (
+            <img src={src} alt={`${nombre} - foto ${i + 1}`} loading={i === 0 ? 'eager' : 'lazy'} width="800" height="800" class="aspect-square w-full shrink-0 snap-center object-contain" />
+          ))}
+        </div>
+        {imagenes.length > 1 && (
+          <div class="sin-scrollbar mt-3 flex gap-2 overflow-x-auto">
+            {imagenes.map((src, i) => (
+              <button class="miniatura h-16 w-16 shrink-0 overflow-hidden rounded-lg ring-2 ring-transparent" data-i={i} aria-label={`Ver foto ${i + 1}`}>
+                <img src={src} alt="" class="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
+        {video && (
+          <video class="mt-4 w-full rounded-xl bg-black" src={video} controls playsinline preload="metadata" poster={imagenes[0]}></video>
+        )}
+      </div>
+
+      <div>
+        <span class="text-sm font-semibold uppercase tracking-wide text-cuero-500">{cat?.nombre}</span>
+        <h1 class="mt-1 text-3xl font-bold sm:text-4xl">{nombre}</h1>
+        {/* Precio oculto por ahora. Para mostrarlo: <p class="mt-3 text-2xl font-semibold text-acero">{producto.data.precio}</p> */}
+        <p class="mt-3 text-lg font-semibold text-acero">Precio: cotizar</p>
+        <p class="mt-4 text-lg text-cuero-700">{resumen}</p>
+
+        {/* Materiales ocultos por ahora. Para mostrarlos, descomentar:
+        {producto.data.materiales.length > 0 && (
+          <div class="mt-6">
+            <h2 class="text-lg font-bold">Materiales</h2>
+            <ul class="mt-2 list-inside list-disc text-cuero-700">
+              {producto.data.materiales.map((m) => <li>{m}</li>)}
+            </ul>
+          </div>
+        )} */}
+
+        {personalizable && (
+          <p class="mt-6 rounded-lg bg-cuero-100 p-4 text-sm">✋ Se puede hacer a tu medida: nombre, iniciales, fierro del rancho o el diseño que quieras.</p>
+        )}
+
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+          <a href={waLink(`Hola, me interesa: ${nombre}\n${url}`)} target="_blank" rel="noopener" class="btn btn-whatsapp">
+            Pedir por WhatsApp
+          </a>
+          {personalizable && (
+            <a href={`/pedidos/?pieza=${encodeURIComponent(nombre)}`} class="btn btn-borde">Personalizar</a>
+          )}
+        </div>
+
+        <div class="prose mt-8 max-w-none text-cuero-900 [&_h2]:mt-6 [&_h2]:text-xl [&_h2]:font-bold [&_li]:ml-5 [&_li]:list-disc [&_p]:mt-3">
+          <Content />
+        </div>
+      </div>
+    </div>
+
+    {relacionados.length > 0 && (
+      <section class="mt-16">
+        <h2 class="text-2xl font-bold">También te puede interesar</h2>
+        <div class="mt-6 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+          {relacionados.map((p) => <ProductCard producto={p} />)}
+        </div>
+      </section>
+    )}
+  </div>
+</Base>
+
+<script>
+  const galeria = document.getElementById('galeria');
+  document.querySelectorAll<HTMLButtonElement>('.miniatura').forEach((b) => {
+    b.addEventListener('click', () => {
+      const i = Number(b.dataset.i);
+      galeria?.scrollTo({ left: galeria.clientWidth * i, behavior: 'smooth' });
+    });
+  });
+</script>
