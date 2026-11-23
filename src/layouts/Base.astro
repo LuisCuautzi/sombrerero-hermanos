@@ -31,7 +31,7 @@ const activo = (href: string) => (href === '/' ? ruta === '/' : ruta.startsWith(
     <title>{tituloCompleto}</title>
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svgxml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={tituloCompleto} />
@@ -44,7 +44,11 @@ const activo = (href: string) => (href === '/' ? ruta === '/' : ruta.startsWith(
       <div class="contenedor flex h-16 items-center justify-between">
         <a href="/" class="flex items-center gap-2" aria-label={`${SITE.nombre} - Inicio`}>
           <img src="/favicon.svg" alt="" width="40" height="40" class="h-10 w-10" />
-          <span class="font-display text-lg font-bold leading-tight sm:text-xl">{SITE.nombre}</span>
+          <span class="font-display text-lg font-bold leading-tight sm:text-xl">
+            <!-- Nombre corto en celular y tablet; completo en pantallas grandes -->
+            <span class="lg:hidden">{SITE.nombreCorto}</span>
+            <span class="hidden lg:inline">{SITE.nombre}</span>
+          </span>
         </a>
 
         <nav class="hidden md:block" aria-label="Principal">

@@ -140,7 +140,7 @@ collections:
         file: src/data/sitio.json
         format: json
         fields:
-          - { label: Nombre del negocio, name: nombre, widget: string }
+          - { label: Nombre corto (header del celular), name: nombreCorto, widget: string }
           - { label: Eslogan, name: eslogan, widget: string }
           - { label: Descripción (para Google), name: descripcion, widget: text }
           - label: WhatsApp

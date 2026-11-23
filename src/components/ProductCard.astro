@@ -25,7 +25,22 @@ const urlCompleta = new URL(href, Astro.site).href;
       height="600"
       class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
     />
-    {video && <span class="absolute right-2 top-2 rounded-full bg-black/60 px-2 py-1 text-xs font-semibold text-white">▶ Video</span>}
+    {video && (
+       <>
+         <video
+           data-preview
+           src={video}
+           poster={imagenes[0]}
+           muted
+           loop
+           playsinline
+           preload="none"
+           aria-hidden="true"
+           class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500"
+         ></video>
+         <span class="absolute right-2 top-2 rounded-full bg-black/60 px-2 py-1 text-xs font-semibold text-white">▶ Video</span>
+       </>
+     )}
 
     <!-- Botón de WhatsApp: va encima del link de la tarjeta (z-10) -->
     <a
@@ -50,3 +65,28 @@ const urlCompleta = new URL(href, Astro.site).href;
     <p class="mt-auto pt-2 text-sm font-semibold text-acero">Cotizar</p>
   </div>
 </article>
+
+<script>
+  // Reproduce los videos de las tarjetas solo mientras se ven en pantalla.
+  // No se activa si el usuario pidió ahorrar datos o reducir animaciones.
+  const videos = document.querySelectorAll<HTMLVideoElement>('video[data-preview]');
+  const conexion = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  const ahorro = conexion?.saveData || matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (videos.length && !ahorro && 'IntersectionObserver' in window) {
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const e of entradas) {
+          const v = e.target as HTMLVideoElement;
+          if (e.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        }
+      },
+      { threshold: 0.6 },
+    );
+    videos.forEach((v) => {
+      v.addEventListener('playing', () => v.classList.add('opacity-100'));
+      observador.observe(v);
+    });
+  }
+</script>
