@@ -16,4 +16,17 @@ const productos = defineCollection({
   }),
 });
 
-export const collections = { productos };
+ const testimonios = defineCollection({
+   loader: glob({ pattern: '**/*.md', base: './src/content/testimonios' }),
+   schema: z.object({
+     nombre: z.string(),
+     ciudad: z.string().optional(),
+     foto: z.string().optional(),
+     producto: z.string().optional(), // slug del producto, ej. "fuste-escudo-nacional"
+     publicado: z.boolean().default(true),
+     destacado: z.boolean().default(false), // sale en el inicio
+     orden: z.number().default(100),
+   }),
+ });
+
+export const collections = { productos, testimonios };

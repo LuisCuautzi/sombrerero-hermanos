@@ -1,0 +1,49 @@
+---
+import { waLink } from '../config';
+
+interface Props {
+  compacto?: boolean; // versión corta para la página de pedidos
+}
+const { compacto = false } = Astro.props;
+
+const pasos = [
+  {
+    titulo: 'Cuéntanos tu idea',
+    texto: 'Mándanos por WhatsApp o con el formulario qué pieza quieres: nombre, iniciales, fierro o una foto de referencia.',
+  },
+  {
+    titulo: 'Te cotizamos',
+    texto: 'Te decimos el precio y el tiempo de entrega de tu pieza.',
+  },
+  {
+    titulo: 'Apartas con anticipo',
+    texto: 'Con el anticipo empezamos a trabajar tu pieza en el taller.',
+  },
+  {
+    titulo: 'La hacemos y te la enviamos',
+    texto: 'Grabamos tu pieza a mano y te la enviamos a cualquier parte de la República.',
+  },
+];
+---
+<section class:list={[!compacto && 'bg-white py-12 sm:py-16']}>
+  <div class:list={[!compacto && 'contenedor']}>
+    <h2 class:list={['font-bold', compacto ? 'text-xl' : 'text-2xl sm:text-3xl']}>¿Cómo pedir?</h2>
+    <ol class:list={['mt-6 grid gap-4', compacto ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-4']}>
+      {pasos.map((p, i) => (
+        <li class:list={['flex gap-4 rounded-xl p-5 ring-1 ring-cuero-100', compacto ? 'bg-white shadow-sm' : 'bg-cuero-50']}>
+          <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cuero-700 font-bold text-white">{i + 1}</span>
+          <div>
+            <h3 class="font-bold">{p.titulo}</h3>
+            <p class="mt-1 text-sm text-cuero-700">{p.texto}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    {!compacto && (
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href={waLink('Hola, quiero cotizar una pieza.')} target="_blank" rel="noopener" class="btn btn-whatsapp">Empezar por WhatsApp</a>
+        <a href="/pedidos/" class="btn btn-borde">Llenar formulario</a>
+      </div>
+    )}
+  </div>
+</section>

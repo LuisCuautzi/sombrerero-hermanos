@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
+
+interface Props {
+  testimonio: CollectionEntry<'testimonios'>;
+}
+const { testimonio } = Astro.props;
+const { nombre, ciudad, foto, producto } = testimonio.data;
+const { Content } = await render(testimonio);
+const pieza = producto ? await getEntry('productos', producto) : undefined;
+---
+<figure class="flex flex-col overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-cuero-100">
+  {foto && (
+    <img src={foto} alt={`Pieza de ${nombre}`} loading="lazy" width="600" height="600" class="aspect-square w-full object-cover" />
+  )}
+  <div class="flex flex-1 flex-col p-5">
+    <span class="font-display text-4xl leading-none text-cuero-500" aria-hidden="true">“</span>
+    <blockquote class="-mt-2 text-cuero-900 [&_p]:mt-2">
+      <Content />
+    </blockquote>
+    <figcaption class="mt-auto pt-4 text-sm">
+      <span class="font-bold">{nombre}</span>
+      {ciudad && <span class="text-cuero-700"> · {ciudad}</span>}
+      {pieza && (
+        <a href={`/catalogo/${pieza.id}/`} class="mt-1 block text-cuero-500 underline">{pieza.data.nombre}</a>
+      )}
+    </figcaption>
+  </div>
+</figure>

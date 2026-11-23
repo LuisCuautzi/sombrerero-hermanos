@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import TestimonioCard from './TestimonioCard.astro';
+
+interface Props {
+  soloDestacados?: boolean;
+  limite?: number;
+}
+const { soloDestacados = false, limite } = Astro.props;
+
+const todos = (await getCollection('testimonios', (t) => t.data.publicado))
+  .filter((t) => !soloDestacados || t.data.destacado)
+  .sort((a, b) => a.data.orden - b.data.orden);
+const lista = limite ? todos.slice(0, limite) : todos;
+---
+{lista.length > 0 && (
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {lista.map((t) => <TestimonioCard testimonio={t} />)}
+  </div>
+)}

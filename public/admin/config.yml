@@ -96,3 +96,37 @@ collections:
         default: 100
         hint: "Número más chico = sale primero."
       - { label: Descripción, name: body, widget: markdown }
+  - name: testimonios
+    label: Clientes (testimonios)
+    label_singular: Testimonio
+    folder: src/content/testimonios
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    identifier_field: nombre
+    slug: "{{nombre}}"
+    summary: "{{nombre}} · {{ciudad}}"
+    sortable_fields: [orden, nombre]
+    media_folder: /public/img/clientes
+    public_folder: /img/clientes
+    fields:
+      - { label: Nombre del cliente, name: nombre, widget: string }
+      - { label: Ciudad / Estado, name: ciudad, widget: string, required: false }
+      - label: Foto del cliente o de su pieza
+        name: foto
+        widget: image
+        required: false
+        hint: "Pide permiso al cliente antes de publicar su foto."
+      - label: Producto relacionado (opcional)
+        name: producto
+        widget: relation
+        collection: productos
+        value_field: "{{slug}}"
+        search_fields: [nombre]
+        display_fields: [nombre]
+        required: false
+      - { label: Comentario del cliente, name: body, widget: markdown }
+      - { label: Publicado, name: publicado, widget: boolean, default: true }
+      - { label: Mostrar en el inicio, name: destacado, widget: boolean, default: false }
+      - { label: Orden, name: orden, widget: number, value_type: int, default: 100 }

@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Testimonios from '../components/Testimonios.astro';
+import { waLink } from '../config';
+
+const hay = (await getCollection('testimonios', (t) => t.data.publicado)).length > 0;
+---
+<Base titulo="Clientes" descripcion="Lo que dicen nuestros clientes y las piezas que les hemos hecho.">
+  <section class="contenedor py-8 sm:py-12">
+    <h1 class="text-3xl font-bold sm:text-4xl">Nuestros clientes</h1>
+    <p class="mt-2 text-cuero-700">Piezas que ya están con sus dueños y lo que nos dijeron de ellas.</p>
+
+    <div class="mt-8">
+      {hay ? (
+        <Testimonios />
+      ) : (
+        <p class="rounded-xl bg-white p-6 text-center text-cuero-700 shadow-sm">Muy pronto compartiremos aquí las piezas de nuestros clientes.</p>
+      )}
+    </div>
+
+    <div class="mt-12 rounded-2xl bg-cuero-700 px-6 py-10 text-center text-white">
+      <h2 class="text-2xl font-bold">¿Ya tienes tu pieza?</h2>
+      <p class="mx-auto mt-2 max-w-xl text-cuero-100">Mándanos una foto con ella y cuéntanos qué te pareció.</p>
+      <a href={waLink('Hola, les mando foto de mi pieza.')} target="_blank" rel="noopener" class="btn mt-6 bg-white text-cuero-900 hover:bg-cuero-100">Mandar foto por WhatsApp</a>
+    </div>
+  </section>
+</Base>

@@ -3,12 +3,16 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { SITE, CATEGORIAS, waLink } from '../config';
+import ComoPedir from '../components/ComoPedir.astro';
+import Testimonios from '../components/Testimonios.astro';
 
 const productos = await getCollection('productos');
 const destacados = productos
   .filter((p) => p.data.destacado)
   .sort((a, b) => a.data.orden - b.data.orden)
   .slice(0, 8);
+
+const hayTestimonios = (await getCollection('testimonios', (t) => t.data.publicado && t.data.destacado)).length > 0;
 
 const valores = [
   { titulo: 'Grabado a mano', texto: 'Cada diseño se graba con buril directo sobre el acero, pieza por pieza, sin producción en serie.' },
@@ -79,6 +83,21 @@ const valores = [
       ))}
     </div>
   </section>
+
+  <ComoPedir />
+
+  <!-- Testimonios: solo aparece si hay alguno publicado y destacado -->
+  {hayTestimonios && (
+    <section class="contenedor py-12 sm:py-16">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-2xl font-bold sm:text-3xl">Lo que dicen nuestros clientes</h2>
+        <a href="/clientes/" class="shrink-0 text-sm font-semibold text-cuero-500 underline">Ver todos</a>
+      </div>
+      <div class="mt-6">
+        <Testimonios soloDestacados limite={3} />
+      </div>
+    </section>
+  )}
 
   <!-- Proceso -->
   <section class="contenedor grid items-center gap-8 py-12 sm:py-16 md:grid-cols-2">
