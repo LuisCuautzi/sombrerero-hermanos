@@ -96,6 +96,7 @@ collections:
         default: 100
         hint: "Número más chico = sale primero."
       - { label: Descripción, name: body, widget: markdown }
+
   - name: testimonios
     label: Clientes (testimonios)
     label_singular: Testimonio
@@ -130,4 +131,90 @@ collections:
       - { label: Publicado, name: publicado, widget: boolean, default: true }
       - { label: Mostrar en el inicio, name: destacado, widget: boolean, default: false }
       - { label: Orden, name: orden, widget: number, value_type: int, default: 100 }
+
   - name: configuracion
+    label: Configuración
+    files:
+      - name: sitio
+        label: Datos del sitio
+        file: src/data/sitio.json
+        format: json
+        fields:
+          - { label: Nombre del negocio, name: nombre, widget: string }
+          - { label: Eslogan, name: eslogan, widget: string }
+          - { label: Descripción (para Google), name: descripcion, widget: text }
+          - label: WhatsApp
+            name: whatsapp
+            widget: string
+            hint: "Con 52 al inicio, sin espacios ni signos. Ej: 5222XXXXXXXX"
+            pattern: ['^52\d{10}$', 'Debe ser 52 seguido de 10 dígitos, sin espacios']
+          - { label: Teléfono (como se muestra), name: telefono, widget: string }
+          - { label: Correo, name: email, widget: string }
+          - { label: Dirección, name: direccion, widget: text }
+          - { label: Horario, name: horario, widget: string }
+          - label: Mapa de Google (link para insertar)
+            name: mapaEmbed
+            widget: string
+            required: false
+            hint: "Google Maps → Compartir → Insertar un mapa → copia solo lo que va dentro de src=\"...\""
+          - { label: Facebook, name: facebook, widget: string, required: false }
+          - { label: Instagram, name: instagram, widget: string, required: false }
+          - { label: TikTok, name: tiktok, widget: string, required: false }
+          - label: "¿Cómo pedir? (pasos)"
+            name: comoPedir
+            widget: list
+            fields:
+              - { label: Título, name: titulo, widget: string }
+              - { label: Texto, name: texto, widget: text }
+          - label: Preguntas frecuentes (página de Contacto)
+            name: preguntas
+            widget: list
+            summary: "{{fields.p}}"
+            fields:
+              - { label: Pregunta, name: p, widget: string }
+              - { label: Respuesta, name: r, widget: text }
+          - label: Nosotros
+            name: nosotros
+            widget: object
+            fields:
+              - label: Párrafos de la historia
+                name: parrafos
+                widget: list
+                field: { label: Párrafo, name: parrafo, widget: text }
+              - label: "Así trabajamos (pasos)"
+                name: pasos
+                widget: list
+                fields:
+                  - { label: Título, name: titulo, widget: string }
+                  - { label: Texto, name: texto, widget: text }
+
+      - name: categorias
+        label: Categorías (textos)
+        file: src/data/categorias.json
+        format: json
+        fields:
+          - label: Categorías
+            name: categorias
+            widget: list
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            summary: "{{fields.nombre}}"
+            fields:
+              - { label: ID, name: id, widget: hidden }
+              - { label: URL, name: slug, widget: hidden }
+              - { label: Nombre corto, name: nombre, widget: string }
+              - { label: Título de la página, name: titulo, widget: string }
+              - { label: Descripción para Google, name: descripcion, widget: text, hint: "Máximo ~155 caracteres." }
+              - label: Párrafos de introducción
+                name: intro
+                widget: list
+                field: { label: Párrafo, name: parrafo, widget: text }
+              - label: Preguntas frecuentes
+                name: preguntas
+                widget: list
+                summary: "{{fields.p}}"
+                fields:
+                  - { label: Pregunta, name: p, widget: string }
+                  - { label: Respuesta, name: r, widget: text }
+              - { label: Mensaje de WhatsApp, name: whatsapp, widget: string }
