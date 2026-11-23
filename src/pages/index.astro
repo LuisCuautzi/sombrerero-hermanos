@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard.astro';
 import { SITE, CATEGORIAS, waLink } from '../config';
 import ComoPedir from '../components/ComoPedir.astro';
 import Testimonios from '../components/Testimonios.astro';
+import { urlCategoria } from '../data/categorias';
 
 const productos = await getCollection('productos');
 const destacados = productos
@@ -52,7 +53,7 @@ const valores = [
     <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
       {CATEGORIAS.map((c) => (
         <a
-          href={`/catalogo/?categoria=${c.id}`}
+          href={urlCategoria(c.id)}
           class="flex min-h-20 items-center justify-center rounded-xl bg-white p-4 text-center font-semibold shadow-sm ring-1 ring-cuero-100 hover:bg-cuero-100"
         >
           {c.nombre}

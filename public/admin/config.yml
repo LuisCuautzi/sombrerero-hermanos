@@ -130,3 +130,4 @@ collections:
       - { label: Publicado, name: publicado, widget: boolean, default: true }
       - { label: Mostrar en el inicio, name: destacado, widget: boolean, default: false }
       - { label: Orden, name: orden, widget: number, value_type: int, default: 100 }
+  - name: configuracion

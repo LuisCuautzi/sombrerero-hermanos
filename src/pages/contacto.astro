@@ -2,13 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { SITE, waLink } from '../config';
 
-const faqs = [
-  { p: '¿Qué trabajan?', r: 'Solo acero: fustes forrados en acero, espuelas, frenos, hebillas, estribos y piezas especiales, todo grabado a mano.' },
-  { p: '¿Hacen envíos?', r: 'Sí, enviamos a toda la República. El costo depende de la pieza y el destino.' },
-  { p: '¿Cuánto tarda un pedido especial?', r: 'Depende de la pieza y del grabado. Te damos la fecha de entrega al cotizar.' },
-  { p: '¿Cómo se paga?', r: 'Se aparta con anticipo y el resto al entregar o antes del envío.' },
-  { p: '¿Cómo cuido mi pieza?', r: 'Límpiala con un trapo suave y seco, evita dejarla mojada y guárdala en un lugar seco para que conserve su brillo.' },
-];
+const faqs = SITE.preguntas;
 ---
 <Base titulo="Contacto" descripcion={`Contacta a ${SITE.nombre}: WhatsApp, teléfono, dirección y horario.`}>
   <section class="contenedor py-8 sm:py-12">
@@ -20,7 +14,13 @@ const faqs = [
           Escríbenos por WhatsApp
         </a>
         <dl class="space-y-4">
-          <div><dt class="font-bold">Teléfono</dt><dd><a href={`tel:${SITE.telefono.replace(/\s/g, '')}`} class="underline">{SITE.telefono}</a></dd></div>
+          <div>
+            <dt class="font-bold">Teléfono</dt>
+            {/* Si hay varios números separados por "/", cada uno lleva su propia liga */}
+            {SITE.telefono.split('/').map((t) => (
+              <dd><a href={`tel:${t.replace(/\s/g, '')}`} class="underline">{t.trim()}</a></dd>
+            ))}
+          </div>
           <div><dt class="font-bold">Correo</dt><dd><a href={`mailto:${SITE.email}`} class="underline">{SITE.email}</a></dd></div>
           <div><dt class="font-bold">Dirección</dt><dd>{SITE.direccion}</dd></div>
           <div><dt class="font-bold">Horario</dt><dd>{SITE.horario}</dd></div>
@@ -31,7 +31,7 @@ const faqs = [
         {SITE.mapaEmbed ? (
           <iframe src={SITE.mapaEmbed} class="h-full w-full border-0" loading="lazy" title="Ubicación del taller" referrerpolicy="no-referrer-when-downgrade"></iframe>
         ) : (
-          <div class="flex h-full items-center justify-center p-6 text-center text-cuero-500">Pega el link del mapa de Google en <code>src/config.ts</code></div>
+          <div class="flex h-full items-center justify-center p-6 text-center text-cuero-500">Pega el link del mapa en el panel: Configuración → Datos del sitio</div>
         )}
       </div>
     </div>

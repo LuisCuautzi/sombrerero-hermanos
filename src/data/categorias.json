@@ -1,0 +1,152 @@
+{
+  "categorias": [
+    {
+      "id": "fustes",
+      "slug": "fustes",
+      "nombre": "Fustes",
+      "titulo": "Fustes forrados en acero grabados a mano",
+      "descripcion": "Fustes forrados en acero y grabados a mano con tu nombre, iniciales, fierro o el diseño que quieras. Acabado plateado, dorado o negro. Cotiza por WhatsApp.",
+      "intro": [
+        "Hacemos fustes forrados en acero y grabados a mano en nuestro taller. La cabeza, el cuello y la teja se graban con buril, pieza por pieza, con el diseño que tú elijas.",
+        "Puedes pedirlo con tu nombre, tus iniciales, el fierro de tu rancho, el Calendario Azteca, el Escudo Nacional, una imagen religiosa o con follaje y grecas. Lo terminamos en plateado, dorado o negro con grabado en plata."
+      ],
+      "preguntas": [
+        {
+          "p": "¿Puedo pedir un fuste con mi nombre o el fierro de mi rancho?",
+          "r": "Sí. Cada fuste se graba a mano, así que podemos poner tu nombre, iniciales, el fierro de tu rancho o el diseño que nos mandes."
+        },
+        {
+          "p": "¿Qué acabados tienen los fustes?",
+          "r": "Plateado, dorado o negro con grabado en plata, según el diseño que elijas."
+        },
+        {
+          "p": "¿Cuánto cuesta un fuste forrado en acero?",
+          "r": "El precio depende del diseño y del grabado. Mándanos tu idea por WhatsApp y te cotizamos."
+        }
+      ],
+      "whatsapp": "Hola, quiero cotizar un fuste forrado en acero."
+    },
+    {
+      "id": "espuelas",
+      "slug": "espuelas",
+      "nombre": "Espuelas",
+      "titulo": "Espuelas de acero grabadas a mano",
+      "descripcion": "Espuelas de acero grabadas a mano, con nombre calado, iniciales o fierro. Estrellas de picos, de engrane o de flor. Acabado plateado, dorado o negro.",
+      "intro": [
+        "Hacemos espuelas de acero grabadas a mano. La pierna se puede grabar o calar con tu nombre, tus iniciales o el fierro de tu rancho.",
+        "Elige el tipo de estrella (de picos, de engrane o de flor) y el acabado: plateado, dorado, negro con plata o con tono antiguo."
+      ],
+      "preguntas": [
+        {
+          "p": "¿Pueden llevar mi nombre?",
+          "r": "Sí. El nombre puede ir grabado o calado a lo largo de la pierna de la espuela."
+        },
+        {
+          "p": "¿Qué tipos de estrella hacen?",
+          "r": "De picos, de engrane y de flor, en distintos tamaños. Si tienes una idea, mándanos una foto de referencia."
+        },
+        {
+          "p": "¿Cuánto cuestan unas espuelas grabadas?",
+          "r": "Depende del diseño, del grabado y del acabado. Escríbenos por WhatsApp y te cotizamos."
+        }
+      ],
+      "whatsapp": "Hola, quiero cotizar unas espuelas."
+    },
+    {
+      "id": "frenos",
+      "slug": "frenos",
+      "nombre": "Frenos",
+      "titulo": "Frenos de acero grabados a mano",
+      "descripcion": "Frenos de acero con piernas grabadas a mano: grecas, follaje, estrellas e iniciales. Acabado plateado, dorado o negro. Cotiza por WhatsApp.",
+      "intro": [
+        "Hacemos frenos de acero con las piernas grabadas a mano: grecas, follaje, estrellas o iniciales.",
+        "Los terminamos en plateado, dorado o negro con grabado en plata, y se pueden hacer a juego con tus espuelas o tu fuste."
+      ],
+      "preguntas": [
+        {
+          "p": "¿Se pueden hacer a juego con las espuelas?",
+          "r": "Sí. Podemos usar el mismo diseño y acabado para que el freno combine con tus espuelas o tu fuste."
+        },
+        {
+          "p": "¿Pueden llevar iniciales?",
+          "r": "Sí. Las piernas del freno se pueden grabar con iniciales, una estrella o el diseño que quieras."
+        },
+        {
+          "p": "¿Cuánto cuesta un freno grabado?",
+          "r": "Depende del diseño. Mándanos tu idea por WhatsApp y te cotizamos."
+        }
+      ],
+      "whatsapp": "Hola, quiero cotizar un freno."
+    },
+    {
+      "id": "hebillas",
+      "slug": "hebillas",
+      "nombre": "Hebillas",
+      "titulo": "Hebillas de acero grabadas y caladas a mano",
+      "descripcion": "Hebillas de acero grabadas y caladas a mano con tu nombre, iniciales, caballos o herraduras. Ovaladas o rectangulares, también en juego.",
+      "intro": [
+        "Hacemos hebillas de acero grabadas y caladas a mano, ovaladas o rectangulares.",
+        "Pueden llevar tu nombre, tus iniciales, caballos, herraduras, rosas o el diseño que quieras, y también hacemos juegos de hebillas a juego."
+      ],
+      "preguntas": [
+        {
+          "p": "¿Pueden llevar mi nombre o mis iniciales?",
+          "r": "Sí. El nombre o las iniciales pueden ir en relieve, grabados o calados."
+        },
+        {
+          "p": "¿Qué formas de hebilla hacen?",
+          "r": "Ovaladas, rectangulares y redondas. También hacemos juegos de varias hebillas a juego."
+        },
+        {
+          "p": "¿Cuánto cuesta una hebilla personalizada?",
+          "r": "Depende del tamaño y del diseño. Escríbenos por WhatsApp y te cotizamos."
+        }
+      ],
+      "whatsapp": "Hola, quiero cotizar una hebilla."
+    },
+    {
+      "id": "estribos",
+      "slug": "estribos",
+      "nombre": "Estribos",
+      "titulo": "Estribos de acero grabados a mano",
+      "descripcion": "Estribos de acero grabados a mano con grecas y el diseño que quieras. Se pueden hacer a juego con tu fuste. Cotiza por WhatsApp.",
+      "intro": [
+        "Hacemos estribos de acero grabados a mano, con grecas y el diseño que elijas.",
+        "Se pueden hacer a juego con tu fuste, tus espuelas o tu freno."
+      ],
+      "preguntas": [
+        {
+          "p": "¿Se pueden hacer a juego con el fuste?",
+          "r": "Sí. Usamos el mismo diseño y acabado para que todo combine."
+        },
+        {
+          "p": "¿Cuánto cuestan unos estribos grabados?",
+          "r": "Depende del diseño. Mándanos tu idea por WhatsApp y te cotizamos."
+        }
+      ],
+      "whatsapp": "Hola, quiero cotizar unos estribos."
+    },
+    {
+      "id": "otros",
+      "slug": "piezas-especiales",
+      "nombre": "Piezas especiales",
+      "titulo": "Piezas especiales de acero grabado",
+      "descripcion": "Llaveros, adornos, placas y piezas especiales de acero grabadas a mano. Ideales para regalo. Cotiza tu pieza por WhatsApp.",
+      "intro": [
+        "Además de fustes, espuelas, frenos y hebillas, hacemos piezas especiales de acero grabado: llaveros de bota y espuela, adornos, sillas en miniatura y placas grabadas.",
+        "Son una buena opción para regalo. Si tienes una idea, cuéntanos y vemos cómo hacerla."
+      ],
+      "preguntas": [
+        {
+          "p": "¿Hacen piezas que no están en el catálogo?",
+          "r": "Sí. Mándanos tu idea o una foto de referencia por WhatsApp y te decimos cómo podemos hacerla."
+        },
+        {
+          "p": "¿Hacen llaveros o regalos por mayoreo?",
+          "r": "Escríbenos con la cantidad que necesitas y te cotizamos."
+        }
+      ],
+      "whatsapp": "Hola, quiero cotizar una pieza especial."
+    }
+  ]
+}

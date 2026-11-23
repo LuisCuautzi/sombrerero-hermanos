@@ -1,0 +1,78 @@
+{
+  "nombre": "Taller de Artesanias \"Sombrerero Hermanos\"",
+  "eslogan": "Talabartería artesanal hecha a mano",
+  "descripcion": "Fustes forrados en acero, espuelas, frenos, hebillas y estribos hechos a mano por artesanos con años de oficio.",
+  "whatsapp": "522228757299",
+  "telefono": "+52 222 875 7299 / +52 554 711 3732",
+  "email": "sombrererohermanos@gmail.com",
+  "direccion": "Calle 6 Oriente, #402, Barrio San Antonio, Amozoc de mota, Puebla",
+  "horario": "Lunes a sábado, 9:00 a 18:00",
+  "mapaEmbed": "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1496.6752249919027!2d-98.04062571784952!3d19.046801579355957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1795223840051!5m2!1ses-419!2smx",
+  "facebook": "https://facebook.com/sombrererohermanos/",
+  "instagram": "https://www.instagram.com/sombrererohermanos/",
+  "tiktok": "https://www.tiktok.com/@artesanas.sombrer?_r=1&_t=ZS-9BZsrHzD81l",
+  "comoPedir": [
+    {
+      "titulo": "Cuéntanos tu idea",
+      "texto": "Mándanos por WhatsApp o con el formulario qué pieza quieres: nombre, iniciales, fierro o una foto de referencia."
+    },
+    {
+      "titulo": "Te cotizamos",
+      "texto": "Te decimos el precio y el tiempo de entrega de tu pieza."
+    },
+    {
+      "titulo": "Apartas con anticipo",
+      "texto": "Con el anticipo empezamos a trabajar tu pieza en el taller."
+    },
+    {
+      "titulo": "La hacemos y te la enviamos",
+      "texto": "Grabamos tu pieza a mano y te la enviamos a cualquier parte de la República."
+    }
+  ],
+  "preguntas": [
+    {
+      "p": "¿Qué trabajan?",
+      "r": "Solo acero: fustes forrados en acero, espuelas, frenos, hebillas, estribos y piezas especiales, todo grabado a mano."
+    },
+    {
+      "p": "¿Hacen envíos?",
+      "r": "Sí, enviamos a toda la República. El costo depende de la pieza y el destino."
+    },
+    {
+      "p": "¿Cuánto tarda un pedido especial?",
+      "r": "Depende de la pieza y del grabado. Te damos la fecha de entrega al cotizar."
+    },
+    {
+      "p": "¿Cómo se paga?",
+      "r": "Se aparta con anticipo y el resto al entregar o antes del envío."
+    },
+    {
+      "p": "¿Cómo cuido mi pieza?",
+      "r": "Límpiala con un trapo suave y seco, evita dejarla mojada y guárdala en un lugar seco para que conserve su brillo."
+    }
+  ],
+  "nosotros": {
+    "parrafos": [
+      "En Sombrerero Hermanos trabajamos el acero. Hacemos fustes forrados en acero, espuelas, frenos, hebillas y estribos, y cada uno se graba a mano en nuestro taller.",
+      "No hacemos piezas en serie: cada diseño se traza y se graba con buril, línea por línea. Por eso podemos poner tu nombre, tus iniciales, el fierro de tu rancho o el diseño que nos pidas."
+    ],
+    "pasos": [
+      {
+        "titulo": "Corte y forma",
+        "texto": "Se corta y se le da forma al acero de cada pieza."
+      },
+      {
+        "titulo": "Diseño",
+        "texto": "Se traza el diseño sobre el acero: nombres, iniciales, fierros, grecas o follaje."
+      },
+      {
+        "titulo": "Grabado a mano",
+        "texto": "Con buril se graba línea por línea, directo sobre el acero."
+      },
+      {
+        "titulo": "Acabado",
+        "texto": "Pulido y acabado final: plateado, dorado o en negro, según la pieza."
+      }
+    ]
+  }
+}

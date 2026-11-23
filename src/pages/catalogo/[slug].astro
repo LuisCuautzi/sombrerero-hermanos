@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { CATEGORIAS, waLink } from '../../config';
+import { urlCategoria } from '../../data/categorias';
 
 export async function getStaticPaths() {
   const productos = await getCollection('productos');
@@ -35,7 +36,7 @@ const schema = {
   <div class="contenedor py-6 sm:py-10">
     <nav class="text-sm text-cuero-500" aria-label="Migas de pan">
       <a href="/catalogo/" class="underline">Catálogo</a> /
-      <a href={`/catalogo/?categoria=${categoria}`} class="underline">{cat?.nombre}</a>
+      <a href={urlCategoria(categoria)} class="underline">{cat?.nombre}</a>
     </nav>
 
     <div class="mt-4 grid gap-8 md:grid-cols-2 md:gap-12">

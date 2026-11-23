@@ -1,29 +1,12 @@
 ---
-import { waLink } from '../config';
+import { SITE, waLink } from '../config';
 
 interface Props {
   compacto?: boolean; // versión corta para la página de pedidos
 }
 const { compacto = false } = Astro.props;
 
-const pasos = [
-  {
-    titulo: 'Cuéntanos tu idea',
-    texto: 'Mándanos por WhatsApp o con el formulario qué pieza quieres: nombre, iniciales, fierro o una foto de referencia.',
-  },
-  {
-    titulo: 'Te cotizamos',
-    texto: 'Te decimos el precio y el tiempo de entrega de tu pieza.',
-  },
-  {
-    titulo: 'Apartas con anticipo',
-    texto: 'Con el anticipo empezamos a trabajar tu pieza en el taller.',
-  },
-  {
-    titulo: 'La hacemos y te la enviamos',
-    texto: 'Grabamos tu pieza a mano y te la enviamos a cualquier parte de la República.',
-  },
-];
+const pasos = SITE.comoPedir; // se editan en el panel: Configuración → Datos del sitio
 ---
 <section class:list={[!compacto && 'bg-white py-12 sm:py-16']}>
   <div class:list={[!compacto && 'contenedor']}>
