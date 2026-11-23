@@ -3,13 +3,15 @@ import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
 
-export default defineConfig({
-  // Cambia esto por tu dominio cuando lo tengas (sirve para SEO y sitemap)
-  site: 'https://sombrerero-hermanos.pages.dev',
-
-  vite: {
-    plugins: [tailwindcss()],
-  },
-
-  integrations: [sitemap()],
-});
+  export default defineConfig({
+    site: 'https://sombrerero-hermanos.pages.dev',
+    integrations: [
+      sitemap({
+        // No mandar a Google la página de "gracias" del formulario
+        filter: (page) => !page.includes('/gracias'),
+      }),
+    ],
+    vite: {
+      plugins: [tailwindcss()],
+    },
+  });
