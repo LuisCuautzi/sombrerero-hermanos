@@ -7,7 +7,7 @@ interface Props {
   descripcion?: string;
   imagen?: string;
 }
-const { titulo, descripcion = SITE.descripcion, imagen = '/img/artesano-trabajando.webp' } = Astro.props;
+const { titulo, descripcion = SITE.descripcion, imagen = '/img/og-image.png' } = Astro.props;
 const tituloCompleto = titulo ? `${titulo} | ${SITE.nombre}` : `${SITE.nombre} · ${SITE.eslogan}`;
 const ruta = Astro.url.pathname;
 const canonical = new URL(ruta, Astro.site);
@@ -31,6 +31,7 @@ const activo = (href: string) => (href === '/' ? ruta === '/' : ruta.startsWith(
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={tituloCompleto} />
     <meta property="og:description" content={descripcion} />
@@ -40,7 +41,10 @@ const activo = (href: string) => (href === '/' ? ruta === '/' : ruta.startsWith(
   <body class="flex min-h-dvh flex-col">
     <header class="sticky top-0 z-40 border-b border-cuero-200 bg-cuero-50/95 backdrop-blur">
       <div class="contenedor flex h-16 items-center justify-between">
-        <a href="/" class="font-display text-lg font-bold leading-tight sm:text-xl">{SITE.nombre}</a>
+        <a href="/" class="flex items-center gap-2" aria-label={`${SITE.nombre} - Inicio`}>
+          <img src="/favicon.svg" alt="" width="40" height="40" class="h-10 w-10" />
+          <span class="font-display text-lg font-bold leading-tight sm:text-xl">{SITE.nombre}</span>
+        </a>
 
         <nav class="hidden md:block" aria-label="Principal">
           <ul class="flex gap-6 text-sm font-semibold">
@@ -81,7 +85,7 @@ const activo = (href: string) => (href === '/' ? ruta === '/' : ruta.startsWith(
     <footer class="mt-16 bg-cuero-900 pb-24 pt-10 text-cuero-100 md:pb-10">
       <div class="contenedor grid gap-8 md:grid-cols-3">
         <div>
-          <p class="font-display text-xl font-bold text-white">{SITE.nombre}</p>
+          <img src="/img/logo-claro.svg" alt={SITE.nombre} width="180" height="154" loading="lazy" class="w-44" />
           <p class="mt-2 text-sm">{SITE.eslogan}</p>
         </div>
         <div class="text-sm">

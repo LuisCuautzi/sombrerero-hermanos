@@ -1,0 +1,98 @@
+# Panel de administración (Sveltia CMS)
+# Cada cambio que se guarda aquí se convierte en un commit al repo
+# y Cloudflare Pages vuelve a publicar la página sola.
+
+backend:
+  name: github
+  repo: LuisCuautzi/sombrerero-hermanos
+  branch: main
+  base_url: https://sombrerero-hermanos.pages.dev   # Cambiar si usan dominio propio
+  auth_endpoint: api/auth                           # functions/api/auth.js
+  commit_messages:
+    create: "Nuevo producto: {{slug}}"
+    update: "Editar producto: {{slug}}"
+    delete: "Borrar producto: {{slug}}"
+    uploadMedia: "Subir archivo: {{path}}"
+    deleteMedia: "Borrar archivo: {{path}}"
+
+# Dónde se guardan las fotos y con qué URL se ven en la página
+media_folder: public/img/productos
+public_folder: /img/productos
+
+# Las fotos del celular se convierten solas a .webp y se achican
+media_libraries:
+  default:
+    config:
+      max_file_size: 15000000
+      transformations:
+        raster_image:
+          format: webp
+          quality: 80
+          width: 1600
+          height: 1600
+
+# URLs sin acentos ni espacios: "Fuste Calendario Azteca" -> fuste-calendario-azteca
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: productos
+    label: Productos
+    label_singular: Producto
+    folder: src/content/productos
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    identifier_field: nombre
+    slug: "{{nombre}}"
+    summary: "{{nombre}}"
+    sortable_fields: [orden, nombre, categoria]
+    view_filters:
+      - { label: Fustes, field: categoria, pattern: fustes }
+      - { label: Espuelas, field: categoria, pattern: espuelas }
+      - { label: Frenos, field: categoria, pattern: frenos }
+      - { label: Hebillas, field: categoria, pattern: hebillas }
+      - { label: Estribos, field: categoria, pattern: estribos }
+      - { label: Otros, field: categoria, pattern: otros }
+      - { label: Destacados, field: destacado, pattern: true }
+    fields:
+      - { label: Nombre, name: nombre, widget: string }
+      - label: Categoría
+        name: categoria
+        widget: select
+        options:
+          - { label: Fustes, value: fustes }
+          - { label: Espuelas, value: espuelas }
+          - { label: Frenos, value: frenos }
+          - { label: Hebillas, value: hebillas }
+          - { label: Estribos, value: estribos }
+          - { label: Otros, value: otros }
+      - label: Fotos
+        name: imagenes
+        widget: list
+        min: 1
+        hint: "La primera foto es la portada. Arrastra para cambiar el orden."
+        field: { label: Foto, name: foto, widget: image }
+      - label: Video (opcional)
+        name: video
+        widget: file
+        required: false
+        media_folder: /public/video
+        public_folder: /video
+      - label: Resumen
+        name: resumen
+        widget: text
+        hint: "Una o dos líneas. Sale en la tarjeta del catálogo y en Google."
+      # Precio oculto por ahora. Para activarlo, descomentar:
+      # - { label: Precio, name: precio, widget: string, required: false }
+      - { label: Se puede personalizar, name: personalizable, widget: boolean, default: true }
+      - { label: Destacado en el inicio, name: destacado, widget: boolean, default: false }
+      - label: Orden
+        name: orden
+        widget: number
+        value_type: int
+        default: 100
+        hint: "Número más chico = sale primero."
+      - { label: Descripción, name: body, widget: markdown }
